@@ -1,19 +1,60 @@
 package com.Barker.model;
 
+import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurencyStrategy;
+
+@Entity
+@Table(name = "planet")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Dog {
 
+	//Specify this field as the ID for our entity.
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "dog_id")
 	private int id;
+	
+	@Column(name = "dog_name", length = 255)
 	private String name;
+	
+	@Column(name = "dog_age", length = 255)
 	private String age;
+	
+	@Column(name = "dog_breed", length = 255)
 	private String breed;
+	
+	@Column(name = "dog_image", length = 255)
 	private String image;
+	
+	@Column(name = "dog_location", length = 255)
 	private String location;
+	
+	@Column(name = "dog_shedding_level", length = 255)
 	private String sheddingLevel;
+	
+	@Column(name = "dog_energy_level", length = 255)
 	private String energyLevel;
+	
+	@Column(name = "dog_bio", length = 255)
 	private String bio;
+	
+	@Column(name = "is_adopted")
 	private boolean isAdopted;
 	
-	// No-args constructor required by Spring.
+	// No-args constructor required by Hibernate.
 	public Dog() {
 		super();
 	}
