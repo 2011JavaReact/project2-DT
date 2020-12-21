@@ -13,10 +13,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurencyStrategy;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-@Table(name = "planet")
+@Table(name = "dog")
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Dog {
@@ -32,6 +32,9 @@ public class Dog {
 	
 	@Column(name = "dog_age", length = 255)
 	private String age;
+	
+	@Column(name = "dog_sex", length = 255)
+	private String sex;
 	
 	@Column(name = "dog_breed", length = 255)
 	private String breed;
@@ -60,11 +63,12 @@ public class Dog {
 	}
 	
 	// Constructor with all arguments. ID is set separately.
-	public Dog(String name, String age, String breed, String image, String location, 
+	public Dog(String name, String age, String sex, String breed, String image, String location, 
 			   String sheddingLevel, String energyLevel, String bio, boolean isAdopted) {
 		super();
 		this.name = name;
 		this.age = age;
+		this.sex = sex;
 		this.breed = breed;
 		this.image = image;
 		this.location = location;
@@ -99,6 +103,15 @@ public class Dog {
 	
 	public void setAge(String age) {
 		this.age = age;
+	}
+	
+	// Setter and getter for Age.
+	public String getSex() {
+		return sex;
+	}
+	
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 	
 	// Setter and getter for Breed.
@@ -171,6 +184,7 @@ public class Dog {
 		result = prime * result + ((age == null) ? 0 : age.hashCode());
 		result = prime * result + ((bio == null) ? 0 : bio.hashCode());
 		result = prime * result + ((breed == null) ? 0 : breed.hashCode());
+		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
 		result = prime * result + ((energyLevel == null) ? 0 : energyLevel.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((image == null) ? 0 : image.hashCode());
@@ -199,6 +213,11 @@ public class Dog {
 			if (other.bio != null)
 				return false;
 		} else if (!bio.equals(other.bio))
+			return false;
+		if (sex == null) {
+			if (other.sex != null)
+				return false;
+		} else if (!sex.equals(other.sex))
 			return false;
 		if (breed == null) {
 			if (other.breed != null)
@@ -239,7 +258,7 @@ public class Dog {
 
 	@Override
 	public String toString() {
-		return "Dog [id=" + id + ", name=" + name + ", age=" + age + ", breed=" + breed + ", image=" + image
+		return "Dog [id=" + id + ", name=" + name + ", age=" + age + ", sex=" + sex + ", breed=" + breed + ", image=" + image
 				+ ", location=" + location + ", sheddingLevel=" + sheddingLevel + ", energyLevel=" + energyLevel
 				+ ", bio=" + bio + ", isAdopted=" + isAdopted + "]";
 	}
