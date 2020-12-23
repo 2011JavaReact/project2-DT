@@ -1,5 +1,8 @@
 package com.Barker.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -56,6 +60,12 @@ public class Dog {
 	
 	@Column(name = "is_adopted")
 	private boolean isAdopted;
+	
+	@ManyToMany(mappedBy = "likedDogs")
+	private List<User> likes;
+	
+	@ManyToMany(mappedBy = "dislikedDogs")
+	private List<User> dislikes;
 	
 	// No-args constructor required by Hibernate.
 	public Dog() {
@@ -176,7 +186,26 @@ public class Dog {
 	public void setAdopted(boolean isAdopted) {
 		this.isAdopted = isAdopted;
 	}
+	
+	// Setters and getters for likes and dislikes join tables.
+	
+	public List<User> getLikes() {
+		return likes;
+	}
 
+	public void setLikes(List<User> likes) {
+		this.likes = likes;
+	}
+
+	public List<User> getDislikes() {
+		return dislikes;
+	}
+
+	public void setDislikes(List<User> dislikes) {
+		this.dislikes = dislikes;
+	}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -195,6 +224,7 @@ public class Dog {
 		return result;
 	}
 
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
