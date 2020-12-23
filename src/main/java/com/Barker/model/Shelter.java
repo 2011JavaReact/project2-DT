@@ -38,7 +38,7 @@ public class Shelter {
 	
 	@OneToMany
 	@JoinTable(name = "available_dogs", joinColumns = @JoinColumn(name="shelter_id"), inverseJoinColumns = @JoinColumn(name = "dog_id"))
-	private ArrayList<Dog> availableDogs = new ArrayList<>(); //TODO: add join table to import dogs
+	private ArrayList<Dog> availableDogs = new ArrayList<>(); 
 	
 	//no args constructor
 	public Shelter() {
@@ -51,7 +51,7 @@ public class Shelter {
 		this.shelterName = shelterName;
 		this.address = address;
 		this.contactInfo = contactInfo;
-		//availableDogs = populateDogs(id); TODO: this should call a method in the dao that fetches all dogs associated with a shelter
+		//availableDogs = populateDogs(id); TODO: this should call a method in the dao that fetches all dogs associated with a shelter and returns them as an arraylist
 	}
 		
 	// Setter and getter for ID.
