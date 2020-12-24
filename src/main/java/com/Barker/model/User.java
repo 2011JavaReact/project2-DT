@@ -21,7 +21,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 // The shelter model is for users looking to create dogs available for adoption.
 
 @Entity
-@Table(name = "user")
+@Table(name = "user_table")
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User {
