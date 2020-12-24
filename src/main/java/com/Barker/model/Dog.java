@@ -63,7 +63,7 @@ public class Dog {
 	
 	@ManyToMany(mappedBy = "likedDogs")
 	private List<User> likes;
-	
+
 	@ManyToMany(mappedBy = "dislikedDogs")
 	private List<User> dislikes;
 	
