@@ -15,7 +15,7 @@ public class UserService {
 	private UserDao userDao;
 	
 	public User createUser(User user) {
-		return user;
+		return userDao.save(user);
 	}
 	
 	public List<User> getUsers() {
