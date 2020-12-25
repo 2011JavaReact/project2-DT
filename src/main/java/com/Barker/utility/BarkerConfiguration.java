@@ -13,6 +13,10 @@ public class BarkerConfiguration implements WebMvcConfigurer{
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**");
+		
+	}
+	public void allowedMethods(CorsRegistry registry) {
+		registry.addMapping("**");
 	}
 	
 //	public WebMvcConfigurer corsConfigurer() {
