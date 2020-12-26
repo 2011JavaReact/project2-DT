@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Barker.dto.UserDto;
 import com.Barker.model.User;
 import com.Barker.service.UserService;
 
@@ -45,12 +46,13 @@ public class UserController {
 			return userService.createUser(user);
 		}
 	
-		@PutMapping("")
-		public User UpdateUser(@RequestBody User user) {
-			// need to complete
-			System.out.println("update user! " + user);
+		@PutMapping("/preferences")
+		public User UpdateUserPreferences(@RequestBody UserDto userDto) {
 			
-			return user;
+			System.out.println("update user preferences! " + userDto);
+			
+			return userService.updateUserPreferences(userDto);
+			
 		}
 }
 
