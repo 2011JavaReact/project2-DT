@@ -31,7 +31,7 @@ public class User {
 	private int id;
 
 	@Column(name = "user_name", length = 255)
-	private String name;
+	private String userName;
 
 	@Column(name = "user_email", length = 255)
 	private String email;
@@ -78,11 +78,17 @@ public class User {
 		super();
 	}
 	
-	public User(String name, String email, String password, Boolean preferencesSet, String breedPreference,
+	public User(String userName, String email, String password) {
+		this.userName = userName;
+		this.email = email;
+		this.password = password;
+	}
+	
+	public User(String userName, String email, String password, Boolean preferencesSet, String breedPreference,
 			String agePreference, String sizePreference, String genderPreference, String goodWithPreference,
 			String coatLengthPreference, String energyLevelPreference, List<Dog> likedDogs, List<Dog> dislikedDogs) {
 		super();
-		this.name = name;
+		this.userName = userName;
 		this.email = email;
 		this.password = password;
 		this.preferencesSet = preferencesSet;
@@ -105,12 +111,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getEmail() {
@@ -211,7 +217,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", preferencesSet="
+		return "User [id=" + id + ", name=" + userName + ", email=" + email + ", password=" + password + ", preferencesSet="
 				+ preferencesSet + ", breedPreference=" + breedPreference + ", agePreference=" + agePreference
 				+ ", sizePreference=" + sizePreference + ", genderPreference=" + genderPreference
 				+ ", goodWithPreference=" + goodWithPreference + ", coatLengthPreference=" + coatLengthPreference
