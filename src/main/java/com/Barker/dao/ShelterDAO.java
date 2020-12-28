@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import com.Barker.model.*;
 import org.hibernate.Session;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 
-
-public class ShelterDAO extends JpaRepository<Shelter, Integer>{
+public interface ShelterDAO extends JpaRepository<Shelter, Integer>{
 	/*public ArrayList<Dog> populateDogs(int id){
 		ArrayList<Dog> availableDogs = new ArrayList<>();
 		return availableDogs;
@@ -23,6 +22,6 @@ public class ShelterDAO extends JpaRepository<Shelter, Integer>{
 	
 	public Shelter save(Shelter shelter);
 	
-	public findById(int id);
+	public Shelter findById(int id);
 	
 }
