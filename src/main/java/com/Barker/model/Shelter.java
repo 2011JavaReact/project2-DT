@@ -38,9 +38,8 @@ public class Shelter {
 	@Column(name = "contact_info", length = 255)
 	private String 	contactInfo;
 	
-	@OneToMany
-	@JoinTable(name = "available_dogs", joinColumns = @JoinColumn(name="shelter_id"), inverseJoinColumns = @JoinColumn(name = "dog_id"))
-	private List<Dog> availableDogs = new ArrayList<>(); 
+	@OneToMany(mappedBy="shelter")
+	private List<Dog> dogs; 
 	
 	//no args constructor
 	public Shelter() {
@@ -92,4 +91,17 @@ public class Shelter {
 		this.contactInfo = contactInfo;
 	}
 
+	public List<Dog> getDogs() {
+		return dogs;
+	}
+
+	public void setDogs(List<Dog> dogs) {
+		this.dogs = dogs;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	
 }
