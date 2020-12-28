@@ -309,7 +309,7 @@ public class Dog {
 
 	@Override
 	public String toString() {
-		return "Dog [id=" + id + "shelterId=" + getShelterId + ", name=" + name + ", age=" + age + ", sex=" + sex + ", breed=" + breed + ", image=" + image
+		return "Dog [id=" + id + "shelterId=" + getShelterId() + ", name=" + name + ", age=" + age + ", sex=" + sex + ", breed=" + breed + ", image=" + image
 				+ ", location=" + location + ", sheddingLevel=" + sheddingLevel + ", energyLevel=" + energyLevel
 				+ ", bio=" + bio + ", isAdopted=" + isAdopted + "]";
 	}
