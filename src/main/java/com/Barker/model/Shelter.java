@@ -40,7 +40,7 @@ public class Shelter {
 	
 	@OneToMany(mappedBy="shelter")
 	private List<Dog> dogs; 
-	
+
 	//no args constructor
 	public Shelter() {
 		super();
@@ -54,7 +54,14 @@ public class Shelter {
 		this.contactInfo = contactInfo;
 		//availableDogs = populateDogs(id); TODO: this should call a method in the dao that fetches all dogs associated with a shelter and returns them as an arraylist
 	}
-		
+	
+	//constructor for shelter without ID for creating a new shelter
+	public Shelter(String shelterName, String address, String contactInfo) {
+		this.shelterName = shelterName;
+		this.address = address;
+		this.contactInfo = contactInfo;
+	}
+	
 	// Setter and getter for ID.
 	public int getId() {
 		return id;
@@ -74,7 +81,7 @@ public class Shelter {
 	}
 	
 	//setter and getter for address
-	public String getAdress() {
+	public String getAddress() {
 		return address;
 	}
 		
@@ -97,10 +104,6 @@ public class Shelter {
 
 	public void setDogs(List<Dog> dogs) {
 		this.dogs = dogs;
-	}
-
-	public String getAddress() {
-		return address;
 	}
 
 	

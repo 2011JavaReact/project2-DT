@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Barker.dao.DogDao;
+import com.Barker.dao.ShelterDao;
 import com.Barker.model.Dog;
+import com.Barker.model.Shelter;
 
 // Written by Andrew Capp
 
@@ -15,6 +17,9 @@ public class DogService {
 	
 	@Autowired
 	private DogDao dogDao;
+	
+	@Autowired
+	private ShelterDao shelterDao;
 	
 	public List<Dog> getAllDogs() {
 		return dogDao.findAll();
@@ -29,8 +34,10 @@ public class DogService {
 		return dogDao.findById(id);
 	}
 	
-	public Dog createDog(Dog dog, int shelter_id) {
+	public Dog createDog(Dog dog, int shelterId) {
 		// need to get shelter from DB and add to dog object...
+		Shelter shelter = shelterDao.findById(shelterId);
+		dog.setShelter(shelter);
 		return dogDao.save(dog);
 	}
 

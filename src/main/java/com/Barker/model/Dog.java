@@ -20,6 +20,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "dog")
 @Cacheable
@@ -62,9 +64,15 @@ public class Dog {
 	@Column(name = "is_adopted")
 	private boolean isAdopted;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="shelter_id", nullable=false)
 	private Shelter shelter;
+	
+	// Getter for Shelter ID so we can use this if needed
+	public int getShelterId() {
+		return this.shelter.getId();
+	}
 	
 	@ManyToMany(mappedBy = "likedDogs")
 	private List<User> likes;
@@ -301,7 +309,7 @@ public class Dog {
 
 	@Override
 	public String toString() {
-		return "Dog [id=" + id + ", name=" + name + ", age=" + age + ", sex=" + sex + ", breed=" + breed + ", image=" + image
+		return "Dog [id=" + id + "shelterId=" + getShelterId + ", name=" + name + ", age=" + age + ", sex=" + sex + ", breed=" + breed + ", image=" + image
 				+ ", location=" + location + ", sheddingLevel=" + sheddingLevel + ", energyLevel=" + energyLevel
 				+ ", bio=" + bio + ", isAdopted=" + isAdopted + "]";
 	}
