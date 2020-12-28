@@ -8,13 +8,21 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public class ShelterDAO {
-	public ArrayList<Dog> populateDogs(int id){
+
+public class ShelterDAO extends JpaRepository<Shelter, Integer>{
+	/*public ArrayList<Dog> populateDogs(int id){
 		ArrayList<Dog> availableDogs = new ArrayList<>();
-		Session session = factory.openSession();
-	        session.beginTransaction();
 		return availableDogs;
-	}
+	}*/
+	
+	public List<Shelter> findAll();
+	
+	public Shelter save(Shelter shelter);
+	
+	public findById(int id);
+	
 }
