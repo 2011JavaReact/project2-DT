@@ -21,5 +21,7 @@ bin/
 .project
 .classpath
 .metadata
-.DS_Store/
+
+# apple
+.DS_Store
 
