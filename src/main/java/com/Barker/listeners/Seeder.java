@@ -15,6 +15,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Seeder class for seeding the development database.
+ * Suggested use: change "spring.jpa.hibernate.ddl-auto" in applicaiton.properties file from update to create.
+ * Then run the BarkerApplication like normal and if you are connected to the database correctly it will refresh
+ * the database with new dummy data provided via faker. If your terminal supports it, the seeding processes should
+ * be displayed in purple text.
+ */
+
 @Component
 public class Seeder implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
@@ -27,12 +35,16 @@ public class Seeder implements ApplicationListener<ContextRefreshedEvent> {
 
     @EventListener
     public void seed(ContextRefreshedEvent event) {
-        System.out.println("Seeding users_table...");
+        System.out.println("\u001B[35m" + "Seeding users_table..." + "\u001B[0m");
         seedUsersTable();
-        System.out.println("Seeding shelter table...");
+        System.out.println("\u001B[35m" + "Seeding shelter table..." + "\u001B[0m");
         seedShelterUsers();
     }
 
+    /**
+     * Method for placing 10 users with preferences into the user_table of the DB
+     * All users passwords are "secret" and their emails end in "yahoo" (shelters end in gmail)
+     */
     private void seedUsersTable() {
         for (int i = 0; i < 10; i++) {
             String userName = faker.name().fullName();
@@ -45,8 +57,15 @@ public class Seeder implements ApplicationListener<ContextRefreshedEvent> {
         }
     }
 
+    /**
+     * This method sets the user preferences for the user passed in.
+     * Most of the preferences are provided by Faker library except
+     * the energy level and the goodWithPreference which is hard coded
+     * every so many users.
+     * @param user the user whose preferences we wish to set
+     */
     private void seedUserPreferences(User user) {
-        System.out.println("Seeding the user's preferences");
+        System.out.println("\u001B[35m" + "Seeding the user's preferences..." + "\u001B[0m");
         user = us.getUserByEmail(user.getEmail());
         UserDto dto;
         if (user.getId() < 4) {
@@ -63,22 +82,29 @@ public class Seeder implements ApplicationListener<ContextRefreshedEvent> {
         us.updateUserPreferences(dto);
     }
 
+    /**
+     * Method that seeds the shelter users. All passwords are secret and all emails end with gmail.
+     */
     private void seedShelterUsers() {
         for (int i = 0; i < 4; i++) {
             String userName = faker.company().name();
             String email = (userName + "@gamil.com").replaceAll("\\s+", "");
             String address = faker.address().fullAddress();
             String password = "secret";
-            Shelter user = new Shelter(userName, address, email);
+            Shelter user = new Shelter(userName, address, email, password);
             System.out.println(user);
             ss.createShelter(user);
         }
 
     }
 
+    /**
+     * Not exactly sure what this method does but don't touch it, we need it for listening for the event.
+     * This will run before any of the other methods.
+     * @param contextRefreshedEvent
+     */
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        System.out.println("Testing the event listner");
-//        seedUsersTable();
+        System.out.println("\u001B[35m" + "Seeding Database..." + "\u001B[0m");
     }
 }
