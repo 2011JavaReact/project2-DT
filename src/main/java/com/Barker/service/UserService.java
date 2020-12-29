@@ -41,4 +41,5 @@ public class UserService {
 		// Update user preferences in database
 		return userDao.save(userToUpdate);
 	}
+	
 }
