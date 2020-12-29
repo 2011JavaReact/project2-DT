@@ -78,6 +78,8 @@ public class User {
 		super();
 	}
 	
+	// Used to create a new user (before any preferences are set)
+	
 	public User(String userName, String email, String password) {
 		this.userName = userName;
 		this.email = email;
@@ -203,6 +205,20 @@ public class User {
 		return likedDogs;
 	}
 
+	// Used to add a liked dog to the liked dogs join table
+	// Must add both sides of many-to-many relationship to join table
+	public void addLikedDog(Dog dog) {
+		likedDogs.add(dog);
+		dog.getLikes().add(this);
+	}
+	
+	// Used to add a disliked to to the disliked dogs join table
+	// Must add both sides of many-to-many relationship to join table
+	public void addDislikedDog(Dog dog) {
+		dislikedDogs.add(dog);
+		dog.getDislikes().add(this);
+	}
+	
 	public void setLikedDogs(List<Dog> likedDogs) {
 		this.likedDogs = likedDogs;
 	}

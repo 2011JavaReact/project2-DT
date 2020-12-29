@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.Barker.dao.UserDao;
 import com.Barker.dto.UserDto;
+import com.Barker.model.Dog;
 import com.Barker.model.User;
 
 @Service
@@ -29,6 +30,10 @@ public class UserService {
 
 	public User getUserByEmail(String email) {
 		return userDao.findByEmail(email);
+	}
+	
+	public User getUserById(int id) {
+		return userDao.findById(id);
 	}
 	
 	public User updateUserPreferences(UserDto userDto) {
@@ -60,4 +65,11 @@ public class UserService {
 		}
 		return false;
 	}
+	
+	public Dog likeDog(User user, Dog dog) {
+		
+		// save user in dao with liked dog added?
+		return dog;
+	}
+	
 }
