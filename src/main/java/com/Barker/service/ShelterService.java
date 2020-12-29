@@ -26,6 +26,10 @@ public class ShelterService {
 		return shelterDao.findById(id);
 	}
 	
+	public Shelter getShelterByShelterName(String shelterName) {
+		return shelterDao.findByShelterName(shelterName);
+	}
+	
 	/*public Shelter updateShelter() { create shelter dto
 	 
 	 	Shelter shelterToUpdate = shelterDAO.findById(
@@ -35,4 +39,14 @@ public class ShelterService {
 		contactInfo
 		
 	}*/
+	public boolean login(Shelter shelter) {
+		List<Shelter> shelters;
+		shelters = shelterDao.findAll();
+		for (Shelter value : shelters) {
+			if (value.getShelterPassword().equals(shelter.getShelterPassword()) && value.getShelterName().equals(shelter.getShelterName())) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
