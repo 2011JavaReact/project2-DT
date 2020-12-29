@@ -22,3 +22,6 @@ bin/
 .classpath
 .metadata
 
+# apple
+.DS_Store
+

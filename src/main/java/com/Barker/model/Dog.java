@@ -12,12 +12,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "dog")
@@ -61,6 +64,16 @@ public class Dog {
 	@Column(name = "is_adopted")
 	private boolean isAdopted;
 	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="shelter_id", nullable=false)
+	private Shelter shelter;
+	
+	// Getter for Shelter ID so we can use this if needed
+	public int getShelterId() {
+		return this.shelter.getId();
+	}
+	
 	@ManyToMany(mappedBy = "likedDogs")
 	private List<User> likes;
 
@@ -72,7 +85,7 @@ public class Dog {
 		super();
 	}
 	
-	// Constructor with all arguments. ID is set separately.
+	// Constructor with all arguments except Shelter and ID which are  set separately.
 	public Dog(String name, String age, String sex, String breed, String image, String location, 
 			   String sheddingLevel, String energyLevel, String bio, boolean isAdopted) {
 		super();
@@ -206,6 +219,14 @@ public class Dog {
 	}
 
 	
+	public Shelter getShelter() {
+		return shelter;
+	}
+
+	public void setShelter(Shelter shelter) {
+		this.shelter = shelter;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -288,7 +309,7 @@ public class Dog {
 
 	@Override
 	public String toString() {
-		return "Dog [id=" + id + ", name=" + name + ", age=" + age + ", sex=" + sex + ", breed=" + breed + ", image=" + image
+		return "Dog [id=" + id + "shelterId=" + getShelterId() + ", name=" + name + ", age=" + age + ", sex=" + sex + ", breed=" + breed + ", image=" + image
 				+ ", location=" + location + ", sheddingLevel=" + sheddingLevel + ", energyLevel=" + energyLevel
 				+ ", bio=" + bio + ", isAdopted=" + isAdopted + "]";
 	}

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 
-public interface ShelterDAO extends JpaRepository<Shelter, Integer>{
+public interface ShelterDao extends JpaRepository<Shelter, Integer>{
 	/*public ArrayList<Dog> populateDogs(int id){
 		ArrayList<Dog> availableDogs = new ArrayList<>();
 		return availableDogs;
