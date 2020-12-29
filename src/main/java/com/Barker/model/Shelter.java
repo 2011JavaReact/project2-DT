@@ -50,19 +50,21 @@ public class Shelter {
 	}
 	
 	//constructor
-	public Shelter(int id, String shelterName, String address, String contactInfo, List dogs) {
+	public Shelter(int id, String shelterName, String address, String contactInfo, List dogs, String shelterPassword) {
 		this.id = id;
 		this.shelterName = shelterName;
 		this.address = address;
 		this.contactInfo = contactInfo;
 		this.dogs = dogs;
+		this.shelterPassword = shelterPassword;
 	}
 	
 	//constructor for shelter without ID for creating a new shelter
-	public Shelter(String shelterName, String address, String contactInfo) {
+	public Shelter(String shelterName, String address, String contactInfo, String shelterPassword) {
 		this.shelterName = shelterName;
 		this.address = address;
 		this.contactInfo = contactInfo;
+		this.shelterPassword = shelterPassword;
 	}
 	
 	// Setter and getter for ID.
