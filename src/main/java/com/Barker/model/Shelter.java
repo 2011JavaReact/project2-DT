@@ -40,6 +40,9 @@ public class Shelter {
 	
 	@OneToMany(mappedBy="shelter")
 	private List<Dog> dogs; 
+	
+	@Column(name = "shelter_password", length = 255)
+	private String shelterPassword;
 
 	//no args constructor
 	public Shelter() {
@@ -47,12 +50,12 @@ public class Shelter {
 	}
 	
 	//constructor
-	public Shelter(int id, String shelterName, String address, String contactInfo) {
+	public Shelter(int id, String shelterName, String address, String contactInfo, List dogs) {
 		this.id = id;
 		this.shelterName = shelterName;
 		this.address = address;
 		this.contactInfo = contactInfo;
-		//availableDogs = populateDogs(id); TODO: this should call a method in the dao that fetches all dogs associated with a shelter and returns them as an arraylist
+		this.dogs = dogs;
 	}
 	
 	//constructor for shelter without ID for creating a new shelter
@@ -96,6 +99,14 @@ public class Shelter {
 			
 	public void setContactInfo(String contactInfo) {
 		this.contactInfo = contactInfo;
+	}
+	//setter and getter for password
+	public String getShelterPassword() {
+		return shelterPassword;
+	}
+				
+	public void setShelterPassword(String shelterPassword) {
+		this.shelterPassword = shelterPassword;
 	}
 
 	public List<Dog> getDogs() {

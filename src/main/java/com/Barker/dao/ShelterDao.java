@@ -24,4 +24,5 @@ public interface ShelterDao extends JpaRepository<Shelter, Integer>{
 	
 	public Shelter findById(int id);
 	
+	public Shelter findByShelterName(String shelterName);
 }
