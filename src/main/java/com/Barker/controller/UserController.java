@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Barker.dto.UserDto;
+import com.Barker.model.Dog;
 import com.Barker.model.User;
 import com.Barker.service.DogService;
 import com.Barker.service.UserService;
@@ -65,6 +66,14 @@ public class UserController {
 			User user = userService.getUserById(userId);
 			user.addDislikedDog(dogService.getDogById(dogId));
 			return createUser(user);			
+		}
+		
+				
+		// Get dogs that are not adopted, liked, or disliked for viewing on swipe page
+		@GetMapping("/{userId}/dogs")
+		public List<Dog> getDogs(@PathVariable int userId) {
+			return dogService.getSwipeableDogs(userId);
+			
 		}
 		
 		@PutMapping("/preferences")

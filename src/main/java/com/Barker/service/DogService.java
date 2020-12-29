@@ -30,6 +30,12 @@ public class DogService {
 		return dogDao.findAll();
 	}
 	
+	
+	// Get all dogs that are swipeable - not liked, not disliked, not adopted
+		public List<Dog> getSwipeableDogs(int userId) {
+			return dogDao.findSwipeableDogs(userId);
+		}
+		
 	public Dog getDogById(int id) {
 		return dogDao.findById(id);
 	}
