@@ -25,13 +25,13 @@ public class LoginController {
     public void login(@RequestBody User user , HttpServletResponse res) throws IOException {
         if (userService.login(user)) {
             System.out.println("Logged in successfully");
-            User loggedInUser = userService.getUser(user);
+            User loggedInUser = userService.getUserByEmail(user.getEmail());
             LoginDto loginDto = new LoginDto(loggedInUser.getId() , loggedInUser.getUserName());
             res.getWriter()
                     .append("Logged in successfully!\n")
                     .append(objectMapper.writeValueAsString(loginDto));
         } else {
-            res.getWriter().append("Incorrect username or password.");
+            res.getWriter().append("Incorrect email or password.");
             res.setStatus(401);
         }
         res.setContentType("application/json");
