@@ -22,6 +22,14 @@ public class UserService {
 	public List<User> getUsers() {
 		return userDao.findAll();
 	}
+
+	public User getUser(User user) {
+		return userDao.findByUserName(user.getUserName());
+	}
+
+	public User getUserByEmail(String email) {
+		return userDao.findByEmail(email);
+	}
 	
 	public User updateUserPreferences(UserDto userDto) {
 		// Retrieve user from DB
@@ -41,5 +49,15 @@ public class UserService {
 		// Update user preferences in database
 		return userDao.save(userToUpdate);
 	}
-	
+
+	public boolean login(User user) {
+		List<User> users;
+		users = userDao.findAll();
+		for (User value : users) {
+			if (value.getPassword().equals(user.getPassword()) && value.getEmail().equals(user.getEmail())) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
