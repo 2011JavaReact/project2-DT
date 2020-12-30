@@ -119,7 +119,7 @@ public class Seeder implements ApplicationListener<ContextRefreshedEvent> {
             String location      = faker.address().fullAddress();
             String sheddingLevel = faker.dog().coatLength();
             String energyLevel   = i % 5 == 0 ? "medium" : i % 2 == 0 ? "Low" : "High";;
-            String bio           = faker.lorem().paragraph();
+            String bio           = faker.lorem().paragraph(1);
             boolean isAdopted    = false;
             if (i > 0 && i % 5 == 0) {
                 shelterId +=1;
