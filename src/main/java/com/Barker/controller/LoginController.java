@@ -28,7 +28,6 @@ public class LoginController {
             User loggedInUser = userService.getUserByEmail(user.getEmail());
             LoginDto loginDto = new LoginDto(loggedInUser.getId() , loggedInUser.getUserName());
             res.getWriter()
-                    .append("Logged in successfully!\n")
                     .append(objectMapper.writeValueAsString(loginDto));
         } else {
             res.getWriter().append("Incorrect email or password.");
