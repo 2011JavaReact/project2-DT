@@ -4,6 +4,7 @@ import com.Barker.dto.UserDto;
 import com.Barker.model.Dog;
 import com.Barker.model.Shelter;
 import com.Barker.model.User;
+import com.Barker.service.DogService;
 import com.Barker.service.ShelterService;
 import com.Barker.service.UserService;
 import com.github.javafaker.Faker;
@@ -31,6 +32,9 @@ public class Seeder implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private ShelterService ss;
 
+    @Autowired
+    private DogService ds;
+
     Faker faker = new Faker();
 
     @EventListener
@@ -39,6 +43,8 @@ public class Seeder implements ApplicationListener<ContextRefreshedEvent> {
         seedUsersTable();
         System.out.println("\u001B[35m" + "Seeding shelter table..." + "\u001B[0m");
         seedShelterUsers();
+        System.out.println("\u001B[35m" + "Seeding dog table..." + "\u001B[0m");
+        seedDogsTable();
     }
 
     /**
@@ -99,9 +105,38 @@ public class Seeder implements ApplicationListener<ContextRefreshedEvent> {
     }
 
     /**
+     * Seeds 40 dogs split evenly between the 4 shelters
+     * To seed more dogs, increment the i constraint by a measurement of 5
+     */
+    private void seedDogsTable() {
+        int shelterId = 1;
+        for (int i = 0; i < 40; i++) {
+            String dogName = faker.funnyName().name();
+            String age     = faker.dog().age();
+            String sex     = faker.dog().gender();
+            String breed   = faker.dog().breed();
+            String image   = "Dog Image";
+            String location      = faker.address().fullAddress();
+            String sheddingLevel = faker.dog().coatLength();
+            String energyLevel   = i % 5 == 0 ? "medium" : i % 2 == 0 ? "Low" : "High";;
+            String bio           = faker.lorem().paragraph();
+            boolean isAdopted    = false;
+            if (i > 0 && i % 5 == 0) {
+                shelterId +=1;
+                if (shelterId > 4) {
+                    shelterId = 1;
+                }
+                System.out.println(shelterId);
+            }
+            Dog dog = new Dog(dogName, age, sex, breed, image, location, sheddingLevel, energyLevel, bio, isAdopted);
+            ds.createDog(dog , shelterId);
+        }
+    }
+
+    /**
      * Not exactly sure what this method does but don't touch it, we need it for listening for the event.
      * This will run before any of the other methods.
-     * @param contextRefreshedEvent
+     * @param contextRefreshedEvent The event
      */
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
