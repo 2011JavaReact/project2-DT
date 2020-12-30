@@ -33,7 +33,6 @@ public class ShelterLoginController {
 			 Shelter loggedInShelter = shelterService.getShelterByShelterName(shelter.getShelterName());
 			 ShelterLoginDto shelterLoginDto = new ShelterLoginDto(loggedInShelter.getId(), loggedInShelter.getShelterName());
 			 res.getWriter()
-             	.append("Logged in successfully!\n")
              	.append(objectMapper.writeValueAsString(shelterLoginDto));
 		 }else {
 	            res.getWriter().append("Incorrect shelter name or password.");
