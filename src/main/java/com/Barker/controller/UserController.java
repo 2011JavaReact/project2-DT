@@ -81,6 +81,11 @@ public class UserController {
 			
 		}
 		
+		@PutMapping("/update")
+		public User UpdateUser(@RequestBody UserDto userDto) {
+			return userService.updateUser(userDto);
+		}
+		
 		@PutMapping("/preferences")
 		public User UpdateUserPreferences(@RequestBody UserDto userDto) {
 			

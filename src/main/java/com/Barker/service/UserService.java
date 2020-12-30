@@ -48,7 +48,7 @@ public class UserService {
 		userToUpdate.setBreedPreference(userDto.getBreedPreference());
 		userToUpdate.setAgePreference(userDto.getAgePreference());
 		userToUpdate.setSizePreference(userDto.getSizePreference());
-		userToUpdate.setGenderPreference(userDto.getEnergyLevelPreference());
+		userToUpdate.setGenderPreference(userDto.getGenderPreference());
 		userToUpdate.setGoodWithPreference(userDto.getGoodWithPreference());
 		userToUpdate.setCoatLengthPreference(userDto.getCoatLengthPreference());
 		userToUpdate.setEnergyLevelPreference(userDto.getEnergyLevelPreference());
@@ -68,7 +68,7 @@ public class UserService {
 		userToUpdate.setBreedPreference(userDto.getBreedPreference());
 		userToUpdate.setAgePreference(userDto.getAgePreference());
 		userToUpdate.setSizePreference(userDto.getSizePreference());
-		userToUpdate.setGenderPreference(userDto.getEnergyLevelPreference());
+		userToUpdate.setGenderPreference(userDto.getGenderPreference());
 		userToUpdate.setGoodWithPreference(userDto.getGoodWithPreference());
 		userToUpdate.setCoatLengthPreference(userDto.getCoatLengthPreference());
 		userToUpdate.setEnergyLevelPreference(userDto.getEnergyLevelPreference());
