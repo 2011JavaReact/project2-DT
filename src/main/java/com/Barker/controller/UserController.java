@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Barker.dto.UserDto;
+import com.Barker.model.Dog;
 import com.Barker.model.User;
+import com.Barker.service.DogService;
 import com.Barker.service.UserService;
 
 @CrossOrigin
@@ -26,6 +29,9 @@ public class UserController {
 		
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private DogService dogService;
 	
 	@Autowired
 	private HttpServletRequest request;
@@ -39,6 +45,11 @@ public class UserController {
 			return userService.getUsers();
 		}
 		
+		@GetMapping("/{id}")
+		public User getUserById(@PathVariable int id) {
+			return userService.getUserById(id);
+		}
+		
 		@PostMapping("")
 		public User createUser(@RequestBody User user) {
 			System.out.println("create user! " + user);
@@ -46,6 +57,35 @@ public class UserController {
 			return userService.createUser(user);
 		}
 	
+		@GetMapping("/{userId}/dogs/{dogId}/like")
+		public User likeDog(@PathVariable int userId, @PathVariable int dogId) {
+			System.out.println("Like dog user: " + userId + " dog: " + dogId);
+			User user = userService.getUserById(userId);
+			user.addLikedDog(dogService.getDogById(dogId));
+			return createUser(user);
+		}
+			
+		@GetMapping("/{userId}/dogs/{dogId}/dislike")
+		public User dislikeDog(@PathVariable int userId, @PathVariable int dogId) {
+			System.out.println("Like dog user: " + userId + " dog: " + dogId);
+			User user = userService.getUserById(userId);
+			user.addDislikedDog(dogService.getDogById(dogId));
+			return createUser(user);			
+		}
+		
+				
+		// Get dogs that are not adopted, liked, or disliked for viewing on swipe page
+		@GetMapping("/{userId}/dogs")
+		public List<Dog> getDogs(@PathVariable int userId) {
+			return dogService.getSwipeableDogs(userId);
+			
+		}
+		
+		@PutMapping("/update")
+		public User UpdateUser(@RequestBody UserDto userDto) {
+			return userService.updateUser(userDto);
+		}
+		
 		@PutMapping("/preferences")
 		public User UpdateUserPreferences(@RequestBody UserDto userDto) {
 			
@@ -54,5 +94,7 @@ public class UserController {
 			return userService.updateUserPreferences(userDto);
 			
 		}
+		
+		
 }
 

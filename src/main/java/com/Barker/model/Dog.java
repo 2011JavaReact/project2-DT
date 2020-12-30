@@ -74,9 +74,11 @@ public class Dog {
 		return this.shelter.getId();
 	}
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "likedDogs")
 	private List<User> likes;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "dislikedDogs")
 	private List<User> dislikes;
 	

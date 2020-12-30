@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.Barker.dao.UserDao;
 import com.Barker.dto.UserDto;
+import com.Barker.model.Dog;
 import com.Barker.model.User;
 
 @Service
@@ -31,6 +32,32 @@ public class UserService {
 		return userDao.findByEmail(email);
 	}
 	
+	public User getUserById(int id) {
+		return userDao.findById(id);
+	}
+	
+	public User updateUser(UserDto userDto) {
+		// Retrieve user from DB
+		User userToUpdate = userDao.findById(userDto.getUserId());
+//		System.out.println(userToUpdate);
+		
+		// Update user from userDto
+		userToUpdate.setUserName(userDto.getUserName());
+		userToUpdate.setEmail(userDto.getEmail());
+		userToUpdate.setPreferencesSet(userDto.getPreferencesSet());
+		userToUpdate.setBreedPreference(userDto.getBreedPreference());
+		userToUpdate.setAgePreference(userDto.getAgePreference());
+		userToUpdate.setSizePreference(userDto.getSizePreference());
+		userToUpdate.setGenderPreference(userDto.getGenderPreference());
+		userToUpdate.setGoodWithPreference(userDto.getGoodWithPreference());
+		userToUpdate.setCoatLengthPreference(userDto.getCoatLengthPreference());
+		userToUpdate.setEnergyLevelPreference(userDto.getEnergyLevelPreference());
+		
+		// Update user preferences in database
+		return userDao.save(userToUpdate);
+	}
+
+	
 	public User updateUserPreferences(UserDto userDto) {
 		// Retrieve user from DB
 		User userToUpdate = userDao.findById(userDto.getUserId());
@@ -41,7 +68,7 @@ public class UserService {
 		userToUpdate.setBreedPreference(userDto.getBreedPreference());
 		userToUpdate.setAgePreference(userDto.getAgePreference());
 		userToUpdate.setSizePreference(userDto.getSizePreference());
-		userToUpdate.setGenderPreference(userDto.getEnergyLevelPreference());
+		userToUpdate.setGenderPreference(userDto.getGenderPreference());
 		userToUpdate.setGoodWithPreference(userDto.getGoodWithPreference());
 		userToUpdate.setCoatLengthPreference(userDto.getCoatLengthPreference());
 		userToUpdate.setEnergyLevelPreference(userDto.getEnergyLevelPreference());
@@ -60,4 +87,11 @@ public class UserService {
 		}
 		return false;
 	}
+	
+	public Dog likeDog(User user, Dog dog) {
+		
+		// save user in dao with liked dog added?
+		return dog;
+	}
+	
 }
