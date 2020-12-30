@@ -14,7 +14,7 @@ pipeline {
         }
         stage('deploy'){
         	steps{
-        		sh 'cp /home/ec2-user/.jenkins/workspace/BarkerBackend/target/barker.war /home/ec2-user/apache-tomcat-8.5.61/webapps'
+        		sh 'cp /home/ec2-user/.jenkins/workspace/BarkerBackend/target/Barker-api.war /home/ec2-user/apache-tomcat-9.0.41/webapps'
         	}
         }
     }
