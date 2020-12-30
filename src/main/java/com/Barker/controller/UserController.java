@@ -45,6 +45,11 @@ public class UserController {
 			return userService.getUsers();
 		}
 		
+		@GetMapping("/{id}")
+		public User getUserById(@PathVariable int id) {
+			return userService.getUserById(id);
+		}
+		
 		@PostMapping("")
 		public User createUser(@RequestBody User user) {
 			System.out.println("create user! " + user);
