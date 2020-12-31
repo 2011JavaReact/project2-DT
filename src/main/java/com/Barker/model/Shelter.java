@@ -67,6 +67,14 @@ public class Shelter {
 		this.shelterPassword = shelterPassword;
 	}
 	
+	// Constructor of shelter without password
+	public Shelter(int id, String shelterName, String address, String contactInfo) {
+		this.id = id;
+		this.shelterName = shelterName;
+		this.address = address;
+		this.contactInfo = contactInfo;
+	}
+	
 	// Setter and getter for ID.
 	public int getId() {
 		return id;

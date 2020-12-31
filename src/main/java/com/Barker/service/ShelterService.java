@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Barker.dao.ShelterDao;
+import com.Barker.dto.UserDto;
 import com.Barker.model.Shelter;
 import com.Barker.model.User;
 
@@ -31,15 +32,18 @@ public class ShelterService {
 		return shelterDao.findByShelterName(shelterName);
 	}
 	
-	/*public Shelter updateShelter() { create shelter dto
-	 
-	 	Shelter shelterToUpdate = shelterDAO.findById(
+	public Shelter updateShelter(Shelter shelter) {
+		// Retrieve shelter from DB (don't want to reset password)
+		Shelter shelterToUpdate = shelterDao.findById(shelter.getId());
+//		System.out.println(userToUpdate);
 		
-		shelterName
-		address
-		contactInfo
-		
-	}*/
+		shelterToUpdate.setShelterName(shelter.getShelterName());
+		shelterToUpdate.setAddress(shelter.getAddress());
+		shelterToUpdate.setContactInfo(shelter.getContactInfo());
+		// Update shelter in database
+		return shelterDao.save(shelterToUpdate);
+	}
+
 	public boolean login(Shelter shelter) {
 		
 		List<Shelter> shelters;
