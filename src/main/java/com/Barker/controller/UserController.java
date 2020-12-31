@@ -1,5 +1,7 @@
 package com.Barker.controller;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,14 +54,20 @@ public class UserController {
 		}
 		
 		@PostMapping("")
-		public User createUser(@RequestBody User user) {
-			System.out.println("create user! " + user);
-			
+		public User createUser(@RequestBody User user) throws IOException {
+//			System.out.println("create user! " + user);
+			try {
 			return userService.createUser(user);
+			}
+			catch (Exception e) {
+				System.out.println("Error Message: "+e.getMessage());
+				response.sendError(400, e.getMessage());
+				return null;
+			}
 		}
 	
 		@GetMapping("/{userId}/dogs/{dogId}/like")
-		public User likeDog(@PathVariable int userId, @PathVariable int dogId) {
+		public User likeDog(@PathVariable int userId, @PathVariable int dogId) throws IOException {
 			System.out.println("Like dog user: " + userId + " dog: " + dogId);
 			User user = userService.getUserById(userId);
 			user.addLikedDog(dogService.getDogById(dogId));
@@ -66,7 +75,7 @@ public class UserController {
 		}
 			
 		@GetMapping("/{userId}/dogs/{dogId}/dislike")
-		public User dislikeDog(@PathVariable int userId, @PathVariable int dogId) {
+		public User dislikeDog(@PathVariable int userId, @PathVariable int dogId) throws IOException {
 			System.out.println("Like dog user: " + userId + " dog: " + dogId);
 			User user = userService.getUserById(userId);
 			user.addDislikedDog(dogService.getDogById(dogId));

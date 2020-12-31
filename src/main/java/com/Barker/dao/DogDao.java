@@ -19,6 +19,11 @@ public interface DogDao extends JpaRepository<Dog, Integer> {
 	
 	public Dog findById(int id);
 	
+	// Get all breeds from database for user preferences
+	
+	@Query(value="SELECT DISTINCT dog_breed FROM dog", nativeQuery = true)
+	public List<String> getBreeds();
+	
 	public Dog save(Dog dog);
 	
 //	public List<Dog> findByLikedDogsIn(User user);
