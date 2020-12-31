@@ -1,4 +1,5 @@
 package com.Barker.service;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class ShelterService {
 	@Autowired
 	private ShelterDao shelterDao;
 	
-	public Shelter createShelter(Shelter shelter) {
+	public Shelter createShelter(Shelter shelter) throws SQLException {
 		return shelterDao.save(shelter);
 	}
 	
@@ -40,6 +41,7 @@ public class ShelterService {
 		
 	}*/
 	public boolean login(Shelter shelter) {
+		
 		List<Shelter> shelters;
 		shelters = shelterDao.findAll();
 		for (Shelter value : shelters) {

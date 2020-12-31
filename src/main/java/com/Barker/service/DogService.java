@@ -30,6 +30,9 @@ public class DogService {
 		return dogDao.findAll();
 	}
 	
+	public List<String> getBreeds() {
+		return dogDao.getBreeds();
+	}
 	
 	// Get all dogs that are swipeable - not liked, not disliked, not adopted
 		public List<Dog> getSwipeableDogs(int userId) {

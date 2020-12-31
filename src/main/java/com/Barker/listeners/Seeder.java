@@ -14,6 +14,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -38,7 +39,7 @@ public class Seeder implements ApplicationListener<ContextRefreshedEvent> {
     Faker faker = new Faker();
 
     @EventListener
-    public void seed(ContextRefreshedEvent event) {
+    public void seed(ContextRefreshedEvent event) throws SQLException {
         System.out.println("\u001B[35m" + "Seeding users_table..." + "\u001B[0m");
         seedUsersTable();
         System.out.println("\u001B[35m" + "Seeding shelter table..." + "\u001B[0m");
@@ -50,8 +51,9 @@ public class Seeder implements ApplicationListener<ContextRefreshedEvent> {
     /**
      * Method for placing 10 users with preferences into the user_table of the DB
      * All users passwords are "secret" and their emails end in "yahoo" (shelters end in gmail)
+     * @throws SQLException 
      */
-    private void seedUsersTable() {
+    private void seedUsersTable() throws SQLException {
         for (int i = 0; i < 10; i++) {
             String userName = faker.name().fullName();
             String email = (userName + "@yahoo.com").replaceAll("\\s+", "");
@@ -90,8 +92,9 @@ public class Seeder implements ApplicationListener<ContextRefreshedEvent> {
 
     /**
      * Method that seeds the shelter users. All passwords are secret and all emails end with gmail.
+     * @throws SQLException 
      */
-    private void seedShelterUsers() {
+    private void seedShelterUsers() throws SQLException {
         for (int i = 0; i < 4; i++) {
             String userName = faker.company().name();
             String email = (userName + "@gamil.com").replaceAll("\\s+", "");

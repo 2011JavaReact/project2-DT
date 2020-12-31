@@ -29,7 +29,7 @@ public class Shelter {
 	@Column(name = "shelter_id")
 	private int id;
 	
-	@Column(name = "shelter_name", length = 255)
+	@Column(name = "shelter_name", unique=true, length = 255)
 	private String shelterName;
 	
 	@Column(name = "address", length = 255)

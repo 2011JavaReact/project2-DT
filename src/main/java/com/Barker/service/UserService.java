@@ -1,5 +1,6 @@
 package com.Barker.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
-	public User createUser(User user) {
+	public User createUser(User user) throws SQLException {
 		return userDao.save(user);
 	}
 	

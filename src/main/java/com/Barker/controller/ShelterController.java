@@ -1,5 +1,6 @@
 package com.Barker.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,10 +51,16 @@ public class ShelterController {
 	}
 	
 	@PostMapping("")
-	public Shelter createShelter(@RequestBody Shelter shelter) {
-		System.out.println("create Shelter " + shelter);
-		
+	public Shelter createShelter(@RequestBody Shelter shelter) throws IOException {
+//		System.out.println("create Shelter " + shelter);
+	try {
 		return shelterService.createShelter(shelter);
+		} 
+	catch (Exception e) {
+		System.out.println("Error Message: "+e.getMessage());
+		response.sendError(400, e.getMessage());
+		return null;
+	}
 	}
 	
 	@PostMapping("/{shelterId}/dogs")
