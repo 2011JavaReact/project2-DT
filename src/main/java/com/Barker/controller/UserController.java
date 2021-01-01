@@ -86,8 +86,18 @@ public class UserController {
 		// Get dogs that are not adopted, liked, or disliked for viewing on swipe page
 		@GetMapping("/{userId}/dogs")
 		public List<Dog> getDogs(@PathVariable int userId) {
-			return dogService.getSwipeableDogs(userId);
+			User user = userService.getUserById(userId);
+			if (!user.getGenderPreference().equals("any") && !user.getBreedPreference().equals("any")) {
+				return dogService.getSwipeableDogsWithGenderAndBreed(user);
+			} else if (!user.getGenderPreference().equals("any")) {
+				return dogService.getSwipeableDogsWithGender(user);
+			} else if (!user.getBreedPreference().equals("any")) {
+				return dogService.getSwipeableDogsWithBreed(user);
+			} else {
+				return dogService.getSwipeableDogs(userId);
+			}
 			
+		
 		}
 		
 		@PutMapping("/update")
