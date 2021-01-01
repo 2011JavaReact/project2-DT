@@ -46,25 +46,25 @@ public class User {
 // These fields are for dog preferences
 
 	@Column(name = "breed_preference", length = 255)
-	private String breedPreference;
+	private String breedPreference = "any";
 
 	@Column(name = "age_preference", length = 255)
-	private String agePreference;
+	private String agePreference = "any";
 
 	@Column(name = "size_preference", length = 255)
-	private String sizePreference;
+	private String sizePreference = "any";
 
 	@Column(name = "gender_preference", length = 255)
-	private String genderPreference;
+	private String genderPreference = "any";
 
 	@Column(name = "good_with_preference", length = 255)
-	private String goodWithPreference;
+	private String goodWithPreference = "any";
 
 	@Column(name = "coat_length_preference", length = 255)
-	private String coatLengthPreference;
+	private String coatLengthPreference = "any";
 
 	@Column(name = "energy_level_preference", length = 255)
-	private String energyLevelPreference;
+	private String energyLevelPreference = "any";
 
 	@ManyToMany
 	@JoinTable(name = "dog_like", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "dog_id"))
