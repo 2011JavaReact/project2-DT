@@ -64,7 +64,7 @@ public class Dog {
 	@Column(name = "is_adopted")
 	private boolean isAdopted;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="shelter_id", nullable=false)
 	private Shelter shelter;
@@ -221,8 +221,8 @@ public class Dog {
 	}
 
 	
-	public Shelter getShelter() {
-		return shelter;
+	public String getShelter() {
+		return shelter.getShelterName();
 	}
 
 	public void setShelter(Shelter shelter) {

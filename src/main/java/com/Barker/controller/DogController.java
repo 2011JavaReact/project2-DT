@@ -35,6 +35,11 @@ public class DogController {
 		return dogService.getDogById(id);
 	}
 	
+	@GetMapping("/breeds")
+	public List<String> getDogBreeds() {
+		return dogService.getBreeds();
+	}
+	
 	// For create dog, should we use the Shelter Controller?  Example Route: /shelter/{id}/dog/new...
 	
 //	@PostMapping("")

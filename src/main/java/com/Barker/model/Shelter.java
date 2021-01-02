@@ -3,6 +3,7 @@ package com.Barker.model;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ public class Shelter {
 	@Column(name = "shelter_id")
 	private int id;
 	
-	@Column(name = "shelter_name", length = 255)
+	@Column(name = "shelter_name", unique=true, length = 255)
 	private String shelterName;
 	
 	@Column(name = "address", length = 255)
@@ -65,6 +66,14 @@ public class Shelter {
 		this.address = address;
 		this.contactInfo = contactInfo;
 		this.shelterPassword = shelterPassword;
+	}
+	
+	// Constructor of shelter without password
+	public Shelter(int id, String shelterName, String address, String contactInfo) {
+		this.id = id;
+		this.shelterName = shelterName;
+		this.address = address;
+		this.contactInfo = contactInfo;
 	}
 	
 	// Setter and getter for ID.

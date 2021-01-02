@@ -28,6 +28,7 @@ public class ShelterLoginController {
 	 
 	 @PostMapping("")
 	 public void login(@RequestBody Shelter shelter, HttpServletResponse res) throws IOException {
+		 System.out.println(shelter.toString());
 		 if (shelterService.login(shelter)) {
 			 System.out.println("Logged in successfully");
 			 Shelter loggedInShelter = shelterService.getShelterByShelterName(shelter.getShelterName());
