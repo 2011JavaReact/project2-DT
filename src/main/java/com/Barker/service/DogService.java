@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.Barker.dao.DogDao;
 import com.Barker.dao.ShelterDao;
+import com.Barker.dto.DogDto;
 import com.Barker.model.Dog;
 import com.Barker.model.Shelter;
 import com.Barker.model.User;
@@ -68,6 +69,22 @@ public class DogService {
 		Shelter shelter = shelterDao.findById(shelterId);
 		dog.setShelter(shelter);
 		return dogDao.save(dog);
+	}
+	
+	public Dog updateDog(DogDto dogDto) {
+		Dog dogToUpdate = dogDao.findById(dogDto.getId());
+
+		dogToUpdate.setName(dogDto.getName());
+		dogToUpdate.setAge(dogDto.getAge());
+		dogToUpdate.setSex(dogDto.getSex());
+		dogToUpdate.setBreed(dogDto.getBreed());
+		dogToUpdate.setImage(dogDto.getImage());
+		dogToUpdate.setSheddingLevel(dogDto.getSheddingLevel());
+		dogToUpdate.setEnergyLevel(dogDto.getEnergyLevel());
+		dogToUpdate.setBio(dogDto.getBio());
+		dogToUpdate.setAdopted(dogDto.isAdopted());
+		
+		return dogDao.save(dogToUpdate);
 	}
 
 }
