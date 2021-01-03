@@ -212,6 +212,13 @@ public class User {
 		dog.getLikes().add(this);
 	}
 	
+	public void unlikeDog(Dog dog) {
+		likedDogs.remove(dog);
+		dog.getLikes().remove(this);
+		addDislikedDog(dog);		
+	}
+	
+	
 	// Used to add a disliked to to the disliked dogs join table
 	// Must add both sides of many-to-many relationship to join table
 	public void addDislikedDog(Dog dog) {
@@ -240,7 +247,8 @@ public class User {
 				+ ", energyLevelPreference=" + energyLevelPreference + ", likedDogs=" + likedDogs + ", dislikedDogs="
 				+ dislikedDogs + "]";
 	}
-	
+
+
 	
 	
 	
