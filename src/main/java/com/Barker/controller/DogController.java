@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Barker.dto.DogDto;
 import com.Barker.model.Dog;
 import com.Barker.service.DogService;
 
@@ -38,6 +41,11 @@ public class DogController {
 	@GetMapping("/breeds")
 	public List<String> getDogBreeds() {
 		return dogService.getBreeds();
+	}
+	
+	@PutMapping("/update")
+	public Dog UpdateDog(@RequestBody DogDto dogDto) {
+		return dogService.updateDog(dogDto);
 	}
 	
 	// For create dog, should we use the Shelter Controller?  Example Route: /shelter/{id}/dog/new...
