@@ -73,6 +73,14 @@ public class UserController {
 			user.addLikedDog(dogService.getDogById(dogId));
 			return createUser(user);
 		}
+		
+		@GetMapping("/{userId}/dogs/{dogId}/unlike")
+		public User unlikeDog(@PathVariable int userId, @PathVariable int dogId) throws IOException {
+			System.out.println("Unlike dog user: " + userId + " dog: " + dogId);
+			User user = userService.getUserById(userId);
+			user.unlikeDog(dogService.getDogById(dogId));
+			return createUser(user);
+		}
 			
 		@GetMapping("/{userId}/dogs/{dogId}/dislike")
 		public User dislikeDog(@PathVariable int userId, @PathVariable int dogId) throws IOException {
